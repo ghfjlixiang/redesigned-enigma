@@ -62,7 +62,12 @@ int main(int argc, const char *argv[])
         // push image into data frame buffer
         DataFrame frame;
         frame.cameraImg = imgGray;
-        dataBuffer.push_back(frame);
+        if (dataBuffer.size() == 2)
+        {
+            dataBuffer.erase(dataBuffer.begin());//remove the oldest frame
+
+        }
+        dataBuffer.push_back(frame);//add newest frame at the end
 
         //// EOF STUDENT ASSIGNMENT
         cout << "#1 : LOAD IMAGE INTO BUFFER done" << endl;
@@ -86,7 +91,7 @@ int main(int argc, const char *argv[])
             //...
         }
         //// EOF STUDENT ASSIGNMENT
-
+/* condition */
         //// STUDENT ASSIGNMENT
         //// TASK MP.3 -> only keep keypoints on the preceding vehicle
 
