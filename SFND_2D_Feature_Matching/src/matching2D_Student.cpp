@@ -101,3 +101,37 @@ void detKeypointsShiTomasi(vector<cv::KeyPoint> &keypoints, cv::Mat &img, bool b
         cv::waitKey(0);
     }
 }
+
+void detKeypointsModern(std::vector<cv::KeyPoint> &keypoints, cv::Mat &img, std::string detectorType, bool bVis)
+{
+    string windowName;
+    double t;
+
+    //FAST, BRISK, ORB, AKAZE, and SIFT.
+    if (detectorType.compare("FAST") == 0)
+    {
+        int threshold = 30; // difference between intensity of the central pixel and pixels of a circle around this pixel
+        bool nNMS = true; // perform non-maxima suppression on keypoints
+
+        cv::FastFeatureDetector::DetectorType type =  cv::FastFeatureDetector::TYPE_9_16; // TYPE_9_16, TYPE_7_12, TYPE_5_8
+        cv::Ptr<cv::FeatureDetector> detector = cv::FastFeatureDetector::create();
+
+        t = (double)cv::getTickCount();
+        detector->detect(img,keypoints);
+        t = ((double)cv::getTickCount() - t) / cv::getTickFrequency();
+        cout << "FAST with n= " << keypoints.size() << " keypoints in " << 1000 * t / 1.0 << " ms" << endl;
+
+        windowName = "FAST Results";
+    }
+
+
+    if (bVis)
+    {
+        cv::Mat visImage = img.clone();
+        cv::drawKeypoints(img, keypoints, visImage, cv::Scalar::all(-1), cv::DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
+        //string windowName = "Shi-Tomasi Corner Detector Results";
+        cv::namedWindow(windowName, 6);
+        imshow(windowName, visImage);
+        cv::waitKey(0);
+    }
+}
