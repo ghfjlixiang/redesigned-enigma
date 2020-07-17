@@ -102,12 +102,25 @@ int main(int argc, const char *argv[])
         if (bFocusOnVehicle)
         {
             // ...
+            auto it = keypoints.begin();
+            while (it < keypoints.end())
+            {
+                /* code */
+                if(!vehicleRect.contains((*it).pt))
+                {
+                    it = keypoints.erase(it);
+                }
+                else
+                {
+                     it++;
+                }
+            }
         }
-
+        cout << "n= " << keypoints.size() <<" keypoints on the preceding vehicle" << endl;
         //// EOF STUDENT ASSIGNMENT
 
         // optional : limit number of keypoints (helpful for debugging and learning)
-        bool bLimitKpts = false;
+        bool bLimitKpts = true;
         if (bLimitKpts)
         {
             int maxKeypoints = 50;
