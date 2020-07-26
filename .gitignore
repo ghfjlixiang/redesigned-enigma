@@ -38,3 +38,4 @@ SFND_2D_Feature_Matching/build/
 set_git.sh
 sparse-checkout.sh
 .vscode/
+*.txt
