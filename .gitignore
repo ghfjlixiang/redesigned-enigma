@@ -35,6 +35,7 @@
 .ssh/
 .student_bashrc
 SFND_2D_Feature_Matching/build/
+SFND_3D_Object_Tracking/build/
 set_git.sh
 sparse-checkout.sh
 .vscode/
